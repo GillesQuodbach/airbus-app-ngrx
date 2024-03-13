@@ -1,10 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AircraftService } from 'src/app/services/aircraft.service';
-import { Aircraft } from 'src/app/model/aircraft.model';
-import { Observable, startWith, map, catchError, of } from 'rxjs';
-import { AppDataState, DataStateEnum } from 'src/app/state/aircraft.state';
-import { Laboratory } from 'laboratory';
 import { AircraftsActionsTypes } from 'src/app/model/action.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-aircrafts-navbar',
   templateUrl: './aircrafts-navbar.component.html',
@@ -12,7 +8,11 @@ import { AircraftsActionsTypes } from 'src/app/model/action.model';
 })
 export class AircraftsNavbarComponent implements OnInit {
   @Output() eventEmitter: EventEmitter<any> = new EventEmitter();
-  constructor() {}
+
+  searchForm = this.fb.group({
+    searchValue: [''],
+  });
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
@@ -32,4 +32,8 @@ export class AircraftsNavbarComponent implements OnInit {
   getDesignedAircrafts() {}
 
   getDevelopmentAircrafts() {}
+
+  searchAircrafts(form: FormGroup) {
+    console.log(form.value.searchValue);
+  }
 }

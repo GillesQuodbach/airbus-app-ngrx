@@ -25,8 +25,11 @@ export class AircraftsComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.labo.tests());
+    // test git credential
   }
-
+  test(){
+    console.log("hello")
+  }
   getAllAircrafts() {
     this.aircrafts$ = this.aircraftService.getAirCrafts().pipe(
       map((data) => ({ dataState: DataStateEnum.LOADED, data: data })),

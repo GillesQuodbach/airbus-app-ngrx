@@ -1,4 +1,6 @@
-<app-aircrafts-navbar></app-aircrafts-navbar>
+<app-aircrafts-navbar
+  (eventEmitter)="onActionEvent($event)"
+></app-aircrafts-navbar>
 <div>
   <ng-container
     *ngIf="aircrafts$ | async as result"

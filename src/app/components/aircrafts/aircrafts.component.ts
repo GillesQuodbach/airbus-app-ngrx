@@ -4,6 +4,7 @@ import { Aircraft } from 'src/app/model/aircraft.model';
 import { Observable, startWith, map, catchError, of } from 'rxjs';
 import { AppDataState, DataStateEnum } from 'src/app/state/aircraft.state';
 import { Laboratory } from 'laboratory';
+import { AircraftsActionsTypes } from 'src/app/model/action.model';
 
 @Component({
   selector: 'app-aircrafts',
@@ -24,5 +25,28 @@ export class AircraftsComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.labo.tests());
+  }
+
+  getAllAircrafts() {
+    this.aircrafts$ = this.aircraftService.getAirCrafts().pipe(
+      map((data) => ({ dataState: DataStateEnum.LOADED, data: data })),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((err) =>
+        of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
+      )
+    );
+  }
+
+  onActionEvent($actionEvent: any) {
+    switch ($actionEvent.type) {
+      case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
+        this.getAllAircrafts();
+        break;
+
+      //TODO à activer une fois le formulaire ok
+      // case AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS:
+      //   this.search($actionEvent.payload);
+      //   break;
+    }
   }
 }

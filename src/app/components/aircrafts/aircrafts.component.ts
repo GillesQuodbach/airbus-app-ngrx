@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AircraftService } from 'src/app/services/aircraft.service';
 import { Aircraft } from 'src/app/model/aircraft.model';
+import { Observable, startWith, map, catchError, of } from 'rxjs';
+import { AppDataState, DataStateEnum } from 'src/app/state/aircraft.state';
+import { Laboratory } from 'laboratory';
 
 @Component({
   selector: 'app-aircrafts',
@@ -8,22 +11,18 @@ import { Aircraft } from 'src/app/model/aircraft.model';
   styleUrls: ['./aircrafts.component.css'],
 })
 export class AircraftsComponent implements OnInit {
-  aircrafts: Aircraft[] | null = null; //soit un tableau d'avions soit null d'ou l'affectation
-  error = null;
+  // aircrafts: Aircraft[] | null = null; //soit un tableau d'avions soit null d'ou l'affectation
+  //option 2 : aircrafts est de type observable contenant des avions
+  // le cigle $  est une convention d'écriture pour indiquer qu'il s'agit d'un observable
+  aircrafts$: Observable<AppDataState<Aircraft[]>> | null = null;
+  // error = null;
+  readonly dataStateEnum = DataStateEnum;
+  constructor(
+    private aircraftService: AircraftService,
+    private labo: Laboratory
+  ) {}
 
-  constructor(private aircraftService: AircraftService) {}
-
-  ngOnInit(): void {}
-
-  getAllAircrafts() {
-    //option 1 : nous observons ici ce qui ce passe lorsqu'on déclenche l'évènement : récupérer la liste d'avions en base
-    this.aircraftService.getAirCrafts().subscribe({
-      next: (data) => (this.aircrafts = data),
-      error: (err) => (this.error = err.message),
-      complete: () => (this.error = null),
-    });
+  ngOnInit(): void {
+    // console.log(this.labo.tests());
   }
-  getDesignedAircrafts() {}
-
-  getDevelopmentAircrafts() {}
 }

@@ -28,7 +28,7 @@ export class AircraftsComponent implements OnInit {
     // test git credential
   }
   test(){
-    console.log("hello")
+    console.log("hello world")
   }
   getAllAircrafts() {
     this.aircrafts$ = this.aircraftService.getAirCrafts().pipe(

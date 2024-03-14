@@ -25,9 +25,11 @@ export class Laboratory {
   sum = (x: number, y: number): number => {
     return x + y;
   }; //accolades non indispensable car une seule instruction
-  display = () => console.log('hello world'); //prend pas d'argument et affiche hello
+  display = () => console.log('hello world');
+  //prend pas d'argument et affiche hello
 
   tests(): void {
+    console.log(this.sum(10, 10));
     this.classique();
     this.somme(5, 7); // 12 -> affiche rien !
     console.log(this.sum(10, 20)); // 30

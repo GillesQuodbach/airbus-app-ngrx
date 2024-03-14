@@ -4,7 +4,8 @@ import { Aircraft } from 'src/app/model/aircraft.model';
 import { Observable, startWith, map, catchError, of } from 'rxjs';
 import { AppDataState, DataStateEnum } from 'src/app/state/aircraft.state';
 import { Laboratory } from 'laboratory';
-import { AircraftsActionsTypes } from 'src/app/model/action.model';
+import { ActionEvent, AircraftsActionsTypes } from 'src/app/model/action.model';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-aircrafts',
@@ -20,16 +21,19 @@ export class AircraftsComponent implements OnInit {
   readonly dataStateEnum = DataStateEnum;
   constructor(
     private aircraftService: AircraftService,
-    private labo: Laboratory
+    private labo: Laboratory,
+    private eventService: EventService
   ) {}
 
   ngOnInit(): void {
     // console.log(this.labo.tests());
-    // test git credential
+    this.eventService.eventSubjectObservable.subscribe(
+      (actionEvent: ActionEvent) => {
+        this.onActionEvent(actionEvent);
+      }
+    );
   }
-  test(){
-    console.log("hello world")
-  }
+
   getAllAircrafts() {
     this.aircrafts$ = this.aircraftService.getAirCrafts().pipe(
       map((data) => ({ dataState: DataStateEnum.LOADED, data: data })),

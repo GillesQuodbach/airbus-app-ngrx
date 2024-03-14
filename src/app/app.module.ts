@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AircraftsEffects } from './ngrx/aircrafts.effect';
+import { AircraftsReducer } from './ngrx/aircrafts.reducer';
 @NgModule({
   declarations: [AppComponent, AircraftsComponent, AircraftsNavbarComponent],
   imports: [
@@ -18,7 +20,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ airbusState: AircraftsReducer }), // spécifie le reducer
-    EffectsModule.forRoot([AircraftsEffect, LoginEffects]), //spécifie les effects
+    EffectsModule.forRoot([AircraftsEffects]), // ! spécifie les effects => LoginEffects <= a remettre
     StoreDevtoolsModule.instrument(), // envoi les infos à chaque action au devtools
   ],
   providers: [],

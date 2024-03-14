@@ -1,7 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AircraftsActionsTypes } from 'src/app/model/action.model';
+import {
+  AircraftsActionsTypes,
+  GetAllAircraftsAction,
+} from 'src/app/ngrx/aircrafts.actions';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-aircrafts-navbar',
   templateUrl: './aircrafts-navbar.component.html',
@@ -13,16 +17,13 @@ export class AircraftsNavbarComponent implements OnInit {
   searchForm = this.fb.group({
     searchValue: [''],
   });
-  constructor(private fb: FormBuilder, private eventService: EventService) {}
+  constructor(private fb: FormBuilder, private store: Store<any>) {}
 
   ngOnInit(): void {}
 
   // lorsque l'utilisateur clic sur le bouton l'action corespondante est PUBLIEE
   getAllAircrafts() {
-    this.eventService.publishEvent({
-      type: AircraftsActionsTypes.GET_ALL_AIRCRAFTS,
-      payload: null,
-    });
+    this.store.dispatch(new GetAllAircraftsAction({}));
   }
 
   onSearch(value: any) {

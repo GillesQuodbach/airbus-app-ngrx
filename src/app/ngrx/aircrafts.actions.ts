@@ -1,6 +1,11 @@
 import { Action } from '@ngrx/store';
 import { Aircraft } from '../model/aircraft.model';
 
+export interface ActionEvent {
+  type: AircraftsActionsTypes;
+  payload: any;
+}
+
 export enum AircraftsActionsTypes {
   // ! AVANT NGRX
   // GET_ALL_AIRCRAFTS = '[Aircrafts] Get All Aircrafts',
@@ -13,6 +18,7 @@ export enum AircraftsActionsTypes {
   GET_ALL_AIRCRAFTS = '[Aircrafts] Get All Aircrafts',
   GET_ALL_AIRCRAFTS_SUCCESS = '[Aircrafts] Get All Aircrafts Success',
   GET_ALL_AIRCRAFTS_ERROR = '[Aircrafts] Get All Aircrafts Error',
+  GET_SEARCH_AIRCRAFTS = '[Aircrafts] Get Searched Aircafts',
 }
 
 // Get all aircrafts

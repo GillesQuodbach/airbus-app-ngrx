@@ -23,10 +23,6 @@ export class AircraftsNavbarComponent implements OnInit {
       type: AircraftsActionsTypes.GET_ALL_AIRCRAFTS,
       payload: null,
     });
-    // this.eventEmitter.emit({
-    //   type: AircraftsActionsTypes.GET_ALL_AIRCRAFTS,
-    //   payload: null,
-    // });
   }
 
   onSearch(value: any) {

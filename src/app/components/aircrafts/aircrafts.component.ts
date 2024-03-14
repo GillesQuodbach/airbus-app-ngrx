@@ -37,16 +37,27 @@ export class AircraftsComponent implements OnInit {
     );
   }
 
+  getSearchedAircrafts(value: any) {
+    this.aircrafts$ = this.aircraftService
+      .getAircraftsBySearchValue(value)
+      .pipe(
+        map((data) => ({ dataState: DataStateEnum.LOADED, data: data })),
+        startWith({ dataState: DataStateEnum.LOADING }),
+        catchError((err) =>
+          of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
+        )
+      );
+  }
+
   onActionEvent($actionEvent: any) {
     switch ($actionEvent.type) {
       case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
         this.getAllAircrafts();
         break;
 
-      //TODO à activer une fois le formulaire ok
-      // case AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS:
-      //   this.search($actionEvent.payload);
-      //   break;
+      case AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS:
+        this.getSearchedAircrafts($actionEvent.payload);
+        break;
     }
   }
 }

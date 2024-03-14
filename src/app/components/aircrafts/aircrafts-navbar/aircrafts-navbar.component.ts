@@ -24,16 +24,13 @@ export class AircraftsNavbarComponent implements OnInit {
   }
 
   onSearch(value: any) {
+    console.log(value.value.searchValue);
     this.eventEmitter.emit({
       type: AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS,
-      payload: value,
+      payload: value.value.searchValue,
     });
   }
   getDesignedAircrafts() {}
 
   getDevelopmentAircrafts() {}
-
-  searchAircrafts(form: FormGroup) {
-    console.log(form.value.searchValue);
-  }
 }

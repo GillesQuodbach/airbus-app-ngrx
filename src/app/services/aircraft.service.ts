@@ -35,4 +35,11 @@ export class AircraftService {
   public getAircraftByMsn(id: number): Observable<Aircraft> {
     return this.http.get<Aircraft>(environment.host + '/aircrafts/' + id);
   }
+
+  // renvoi un avion à partir d'une recherche
+  public getAircraftsBySearchValue(value: any): Observable<Aircraft[]> {
+    return this.http.get<Aircraft[]>(
+      environment.host + `/aircrafts?prog_like=${value}`
+    );
+  }
 }

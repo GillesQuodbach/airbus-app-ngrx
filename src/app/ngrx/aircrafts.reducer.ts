@@ -55,6 +55,12 @@ export function AircraftsReducer(
         errorMessage: (<AircraftsActions>action).payload,
       };
 
+    case AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
     default:
       return { ...state };
   }

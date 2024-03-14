@@ -24,9 +24,14 @@ export enum AircraftsActionsTypes {
   GET_DESIGNED_AIRCRAFTS = '[Aircrafts] Get Designed Aircrafts',
   GET_DESIGNED_AIRCRAFTS_SUCCESS = '[Aircrafts] Get Designed Aircrafts Success',
   GET_DESIGNED_AIRCRAFTS_ERROR = '[Aircrafts] Get Designed Aircrafts Error',
+
+  //? Action : Get Development aircrafts
+  GET_DEVELOPMENT_AIRCRAFTS = '[Aircrafts] Get Development Aircrafts',
+  GET_DEVELOPMENT_AIRCRAFTS_SUCCESS = '[Aircrafts] Get Development Aircrafts Success',
+  GET_DEVELOPMENT_AIRCRAFTS_ERROR = '[Aircrafts] Get Development Aircrafts Error',
 }
 
-// Get all aircrafts
+// ! Get all aircrafts
 export class GetAllAircraftsAction implements Action {
   type: AircraftsActionsTypes = AircraftsActionsTypes.GET_ALL_AIRCRAFTS;
   constructor(public payload: any) {}
@@ -42,7 +47,7 @@ export class GetAllAircraftsActionError implements Action {
   constructor(public payload: string) {}
 }
 
-// Get designed aircrafts
+// ! Get designed aircrafts
 export class GetDesignedAircraftsAction implements Action {
   type: AircraftsActionsTypes = AircraftsActionsTypes.GET_DESIGNED_AIRCRAFTS;
   constructor(public payload: any) {}
@@ -59,10 +64,31 @@ export class GetDesignedAircraftsActionError implements Action {
     AircraftsActionsTypes.GET_DESIGNED_AIRCRAFTS_ERROR;
   constructor(public payload: string) {}
 }
+
+// ! Get deveopment aircrafts
+export class GetDevelopmentAircraftsAction implements Action {
+  type: AircraftsActionsTypes = AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS;
+  constructor(public payload: Aircraft[]) {}
+}
+
+export class GetDevelopmentAircraftsActionSuccess implements Action {
+  type: AircraftsActionsTypes =
+    AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS_SUCCESS;
+  constructor(public payload: Aircraft[]) {}
+}
+
+export class GetDevelopmentAircraftsActionError implements Action {
+  type: AircraftsActionsTypes =
+    AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS_ERROR;
+  constructor(public payload: string) {}
+}
 export type AircraftsActions =
   | GetAllAircraftsAction
   | GetAllAircraftsActionSuccess
   | GetAllAircraftsActionError
   | GetDesignedAircraftsAction
   | GetDesignedAircraftsActionSuccess
-  | GetDesignedAircraftsActionError;
+  | GetDesignedAircraftsActionError
+  | GetDevelopmentAircraftsAction
+  | GetDevelopmentAircraftsActionSuccess
+  | GetDevelopmentAircraftsActionError;

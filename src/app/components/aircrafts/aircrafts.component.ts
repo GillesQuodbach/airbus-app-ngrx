@@ -36,38 +36,4 @@ export class AircraftsComponent implements OnInit {
   ngOnInit(): void {
     this.aircraftsState$ = this.store.pipe(map((state) => state.airbusState));
   }
-
-  getAllAircrafts() {
-    this.aircrafts$ = this.aircraftService.getAirCrafts().pipe(
-      map((data) => ({ dataState: DataStateEnum.LOADED, data: data })),
-      startWith({ dataState: DataStateEnum.LOADING }),
-      catchError((err) =>
-        of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
-      )
-    );
-  }
-
-  // getSearchedAircrafts(value: any) {
-  //   this.aircrafts$ = this.aircraftService
-  //     .getAircraftsBySearchValue(value)
-  //     .pipe(
-  //       map((data) => ({ dataState: DataStateEnum.LOADED, data: data })),
-  //       startWith({ dataState: DataStateEnum.LOADING }),
-  //       catchError((err) =>
-  //         of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
-  //       )
-  //     );
-  // }
-
-  onActionEvent($actionEvent: any) {
-    switch ($actionEvent.type) {
-      case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
-        this.getAllAircrafts();
-        break;
-
-      // case AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS:
-      //   this.getSearchedAircrafts($actionEvent.payload);
-      //   break;
-    }
-  }
 }

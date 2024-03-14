@@ -55,13 +55,27 @@ export function AircraftsReducer(
         errorMessage: (<AircraftsActions>action).payload,
       };
 
+
+    // ! GET DEVELOPMENT AIRCRAFTS
     case AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS:
       return {
         ...state,
         dataState: AircraftsStateEnum.LOADING,
         aircrafts: (<AircraftsActions>action).payload,
       };
-    default:
+    case AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS_SUCCESS:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADED,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
+   case AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS_ERROR:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.ERROR,
+        errorMessage: (<AircraftsActions>action).payload,
+      };
+       default:
       return { ...state };
   }
 }

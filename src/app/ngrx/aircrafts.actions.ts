@@ -68,7 +68,7 @@ export class GetDesignedAircraftsActionError implements Action {
 // ! Get deveopment aircrafts
 export class GetDevelopmentAircraftsAction implements Action {
   type: AircraftsActionsTypes = AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS;
-  constructor(public payload: Aircraft[]) {}
+  constructor(public payload: any) {}
 }
 
 export class GetDevelopmentAircraftsActionSuccess implements Action {

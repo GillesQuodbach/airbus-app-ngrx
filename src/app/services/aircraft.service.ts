@@ -25,9 +25,9 @@ export class AircraftService {
   }
 
   //liste des avions en phase de développement
-  public getDeveloppementAircraft(): Observable<Aircraft[]> {
+  public getDevelopmentAircraft(): Observable<Aircraft[]> {
     return this.http.get<Aircraft[]>(
-      environment.host + '/aircrafts?developpment-true'
+      environment.host + '/aircrafts?development=true'
     );
   }
 

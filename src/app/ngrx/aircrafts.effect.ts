@@ -9,6 +9,8 @@ import {
   GetAllAircraftsActionError,
   GetDesignedAircraftsActionSuccess,
   GetDesignedAircraftsActionError,
+  GetDevelopmentAircraftsActionSuccess,
+  GetDevelopmentAircraftsActionError,
 } from './aircrafts.actions';
 
 @Injectable()
@@ -36,11 +38,22 @@ export class AircraftsEffects {
       mergeMap((action) => {
         return this.aircraftService.getDesignedAircrafts().pipe(
           map((aircrafts) => new GetDesignedAircraftsActionSuccess(aircrafts)),
-          catchError((err) =>
-            of(new GetDesignedAircraftsActionError(err.message))
+          catchError((err) => of(new GetDesignedAircraftsActionError(err.message))
           )
         );
       })
     )
   );
+  getDevelopmentAircraftsEffect: Observable<Action> = createEffect(() =>
+    this.effectActions.pipe(
+      ofType(AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS),
+      mergeMap((action) => {
+        return this.aircraftService.getDevelopmentAircraft().pipe(
+          map((aircrafts) => new GetDevelopmentAircraftsActionSuccess(aircrafts)),
+          catchError((err) => of(new GetDevelopmentAircraftsActionError(err.message)))
+        );
+      })
+    )
+  );
+
 }

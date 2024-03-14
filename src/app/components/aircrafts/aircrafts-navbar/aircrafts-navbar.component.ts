@@ -3,6 +3,7 @@ import {
   AircraftsActionsTypes,
   GetAllAircraftsAction,
   GetDesignedAircraftsAction,
+  GetDevelopmentAircraftsAction,
 } from 'src/app/ngrx/aircrafts.actions';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
@@ -38,5 +39,7 @@ export class AircraftsNavbarComponent implements OnInit {
     this.store.dispatch(new GetDesignedAircraftsAction({}));
   }
 
-  getDevelopmentAircrafts() {}
+  getDevelopmentAircrafts() {
+    this.store.dispatch(new GetDevelopmentAircraftsAction({}))
+  }
 }

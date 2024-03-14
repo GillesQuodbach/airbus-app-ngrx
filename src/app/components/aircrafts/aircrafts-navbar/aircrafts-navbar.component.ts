@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AircraftsActionsTypes,
   GetAllAircraftsAction,
+  GetDesignedAircraftsAction,
 } from 'src/app/ngrx/aircrafts.actions';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
@@ -33,7 +34,9 @@ export class AircraftsNavbarComponent implements OnInit {
       payload: value.value.searchValue,
     });
   }
-  getDesignedAircrafts() {}
+  getDesignedAircrafts() {
+    this.store.dispatch(new GetDesignedAircraftsAction({}));
+  }
 
   getDevelopmentAircrafts() {}
 }

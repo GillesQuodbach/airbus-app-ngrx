@@ -12,6 +12,7 @@ export function AircraftsReducer(
   action: Action
 ) {
   switch (action.type) {
+    // ! GET ALL AIRCRAFTS
     case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
       console.log('loading...');
       return {
@@ -28,6 +29,26 @@ export function AircraftsReducer(
       };
 
     case AircraftsActionsTypes.GET_ALL_AIRCRAFTS_ERROR:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.ERROR,
+        errorMessage: (<AircraftsActions>action).payload,
+      };
+
+    // ! GET DESIGNED AIRCRAFTS
+    case AircraftsActionsTypes.GET_DESIGNED_AIRCRAFTS:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
+    case AircraftsActionsTypes.GET_DESIGNED_AIRCRAFTS_SUCCESS:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADED,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
+    case AircraftsActionsTypes.GET_DESIGNED_AIRCRAFTS_ERROR:
       return {
         ...state,
         dataState: AircraftsStateEnum.ERROR,

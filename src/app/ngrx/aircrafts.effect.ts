@@ -11,6 +11,8 @@ import {
   GetDesignedAircraftsActionError,
   GetDevelopmentAircraftsActionSuccess,
   GetDevelopmentAircraftsActionError,
+  GetSearchedAircraftsActionSuccess,
+  GetSearchedAircraftsActionError,
 } from './aircrafts.actions';
 
 @Injectable()
@@ -38,7 +40,8 @@ export class AircraftsEffects {
       mergeMap((action) => {
         return this.aircraftService.getDesignedAircrafts().pipe(
           map((aircrafts) => new GetDesignedAircraftsActionSuccess(aircrafts)),
-          catchError((err) => of(new GetDesignedAircraftsActionError(err.message))
+          catchError((err) =>
+            of(new GetDesignedAircraftsActionError(err.message))
           )
         );
       })
@@ -49,11 +52,33 @@ export class AircraftsEffects {
       ofType(AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS),
       mergeMap((action) => {
         return this.aircraftService.getDevelopmentAircraft().pipe(
-          map((aircrafts) => new GetDevelopmentAircraftsActionSuccess(aircrafts)),
-          catchError((err) => of(new GetDevelopmentAircraftsActionError(err.message)))
+          map(
+            (aircrafts) => new GetDevelopmentAircraftsActionSuccess(aircrafts)
+          ),
+          catchError((err) =>
+            of(new GetDevelopmentAircraftsActionError(err.message))
+          )
         );
       })
     )
   );
 
+  GetSearchedAircraftsEffect: Observable<Action> = createEffect(() =>
+    this.effectActions.pipe(
+      ofType(AircraftsActionsTypes.GET_SEARCHED_AIRCRAFTS),
+      mergeMap((action: { type: string; payload: { value: string } }) => {
+        console.log('GetSearchedAircraftsEffect', action.payload);
+        return this.aircraftService
+          .getSearchedAircraft(action.payload.value)
+          .pipe(
+            map(
+              (aircrafts) => new GetSearchedAircraftsActionSuccess(aircrafts)
+            ),
+            catchError((err) =>
+              of(new GetSearchedAircraftsActionError(err.message))
+            )
+          );
+      })
+    )
+  );
 }

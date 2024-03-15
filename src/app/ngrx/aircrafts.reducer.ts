@@ -55,7 +55,6 @@ export function AircraftsReducer(
         errorMessage: (<AircraftsActions>action).payload,
       };
 
-
     // ! GET DEVELOPMENT AIRCRAFTS
     case AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS:
       return {
@@ -69,13 +68,33 @@ export function AircraftsReducer(
         dataState: AircraftsStateEnum.LOADED,
         aircrafts: (<AircraftsActions>action).payload,
       };
-   case AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS_ERROR:
+    case AircraftsActionsTypes.GET_DEVELOPMENT_AIRCRAFTS_ERROR:
       return {
         ...state,
         dataState: AircraftsStateEnum.ERROR,
         errorMessage: (<AircraftsActions>action).payload,
       };
-       default:
+
+    // ! GET SEARCHED AIRCRAFTS
+    case AircraftsActionsTypes.GET_SEARCHED_AIRCRAFTS:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
+    case AircraftsActionsTypes.GET_SEARCHED_AIRCRAFTS_SUCCESS:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADED,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
+    case AircraftsActionsTypes.GET_SEARCHED_AIRCRAFTS_ERROR:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.ERROR,
+        errorMessage: (<AircraftsActions>action).payload,
+      };
+    default:
       return { ...state };
   }
 }

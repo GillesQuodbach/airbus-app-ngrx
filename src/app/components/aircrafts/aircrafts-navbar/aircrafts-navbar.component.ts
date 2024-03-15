@@ -4,6 +4,7 @@ import {
   GetAllAircraftsAction,
   GetDesignedAircraftsAction,
   GetDevelopmentAircraftsAction,
+  GetSearchedAircraftsAction,
 } from 'src/app/ngrx/aircrafts.actions';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
@@ -28,18 +29,22 @@ export class AircraftsNavbarComponent implements OnInit {
     this.store.dispatch(new GetAllAircraftsAction({}));
   }
 
-  onSearch(value: any) {
+  getSearchedAircrafts(value: any) {
+    // console.log(value.value.searchValue);
+    // this.eventEmitter.emit({
+    //   type: AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS,
+    //   payload: value.value.searchValue,
+    // });
     console.log(value.value.searchValue);
-    this.eventEmitter.emit({
-      type: AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS,
-      payload: value.value.searchValue,
-    });
+    this.store.dispatch(
+      new GetSearchedAircraftsAction({ value: value.value.searchValue })
+    );
   }
   getDesignedAircrafts() {
     this.store.dispatch(new GetDesignedAircraftsAction({}));
   }
 
   getDevelopmentAircrafts() {
-    this.store.dispatch(new GetDevelopmentAircraftsAction({}))
+    this.store.dispatch(new GetDevelopmentAircraftsAction({}));
   }
 }

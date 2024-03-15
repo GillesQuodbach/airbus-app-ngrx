@@ -19,7 +19,7 @@
   <form
     class="d-flex flex-row align-items-center"
     [formGroup]="searchForm"
-    (ngSubmit)="onSearch(searchForm)"
+    (ngSubmit)="getSearchedAircrafts(searchForm)"
   >
     <input type="text" formControlName="searchValue" class="form-control m-2" />
     <button class="btn btn-outline-info m-2" type="submit">Search</button>

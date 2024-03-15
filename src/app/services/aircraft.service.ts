@@ -37,7 +37,7 @@ export class AircraftService {
   }
 
   // renvoi un avion à partir d'une recherche
-  public getAircraftsBySearchValue(value: any): Observable<Aircraft[]> {
+  public getSearchedAircraft(value: string): Observable<Aircraft[]> {
     return this.http.get<Aircraft[]>(
       environment.host + `/aircrafts?prog_like=${value}`
     );

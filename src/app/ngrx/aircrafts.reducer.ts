@@ -5,13 +5,31 @@ import {
   initState,
 } from './aircrafts.state';
 import { AircraftsActions, AircraftsActionsTypes } from './aircrafts.actions';
-import { STATE_PROVIDERS } from '@ngrx/store/src/state';
+import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Operation, OperationActionsTypes } from './aircrafts.operations';
+export const adapter: EntityAdapter<Operation> = createEntityAdapter<Operation>(
+  {}
+);
+
+export const initialState: AircraftsState = adapter.getInitialState({
+  aircrafts: [],
+  errorMessage: '',
+  dataState: AircraftsStateEnum.INITIAL,
+  ids: [],
+  entities: {},
+});
 
 export function AircraftsReducer(
   state: AircraftsState = initState,
   action: Action
 ) {
   switch (action.type) {
+    // OPERATION ACTIONS
+    case OperationActionsTypes.ADD_OPERATION:
+      return adapter.addOne((<AircraftsActions>action).payload, state);
+
+    case OperationActionsTypes.REMOVE_OPERATION:
+      return adapter.removeOne((<AircraftsActions>action).payload, state);
     // ! GET ALL AIRCRAFTS
     case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
       console.log('loading...');

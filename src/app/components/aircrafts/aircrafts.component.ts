@@ -14,6 +14,7 @@ import {
 } from 'src/app/ngrx/aircrafts.actions';
 import { EventService } from 'src/app/services/event.service';
 import { Store } from '@ngrx/store';
+import { selectCountAlertAircrafts } from 'src/app/ngrx/aircrafts.selectors';
 
 @Component({
   selector: 'app-aircrafts',
@@ -23,15 +24,19 @@ import { Store } from '@ngrx/store';
 export class AircraftsComponent implements OnInit {
   aircrafts$: Observable<AppDataState<Aircraft[]>> | null = null;
   aircraftsState$: Observable<AircraftsState> | null = null;
+  counterAlertAircrafts$: Observable<number> | undefined;
 
   readonly aircraftsStateEnum = AircraftsStateEnum;
   readonly dataStateEnum = DataStateEnum;
+
   constructor(
     private aircraftService: AircraftService,
     private labo: Laboratory,
     private eventService: EventService,
     private store: Store<any>
-  ) {}
+  ) {
+    this.counterAlertAircrafts$ = store.select(selectCountAlertAircrafts);
+  }
 
   ngOnInit(): void {
     this.aircraftsState$ = this.store.pipe(map((state) => state.airbusState));

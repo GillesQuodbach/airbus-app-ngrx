@@ -1,6 +1,6 @@
 import { EntityState } from '@ngrx/entity';
 import { Aircraft } from '../model/aircraft.model';
-import { Operation } from './aircrafts.operations';
+import { Operation } from '../model/operation.model';
 
 export enum AircraftsStateEnum { // les diffrents états du state
   LOADING = 'Loading',
@@ -24,3 +24,9 @@ export const initState: AircraftsState = {
   ids: [],
   entities: {},
 };
+
+// {
+//   type: '[Operation] Add one',
+//   payload: {id:1, name:'po'}
+
+//   }

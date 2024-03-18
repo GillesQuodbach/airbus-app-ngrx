@@ -6,11 +6,15 @@ import {
 } from './aircrafts.state';
 import { AircraftsActions, AircraftsActionsTypes } from './aircrafts.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Operation, OperationActionsTypes } from './aircrafts.operations';
+import { Operation } from '../model/operation.model';
+import { OperationsAction, OperationsActionsType } from './operation.actions';
+
+// adaptateur pour utiliser les méthodes de Entities
 export const adapter: EntityAdapter<Operation> = createEntityAdapter<Operation>(
   {}
 );
 
+// state initial
 export const initialState: AircraftsState = adapter.getInitialState({
   aircrafts: [],
   errorMessage: '',
@@ -20,16 +24,15 @@ export const initialState: AircraftsState = adapter.getInitialState({
 });
 
 export function AircraftsReducer(
-  state: AircraftsState = initState,
+  state: AircraftsState = initialState,
   action: Action
-) {
+): AircraftsState {
   switch (action.type) {
-    // OPERATION ACTIONS
-    case OperationActionsTypes.ADD_OPERATION:
-      return adapter.addOne((<AircraftsActions>action).payload, state);
+    case OperationsActionsType.ADD_OPERATION:
+      return adapter.addOne((<OperationsAction>action).payload, state);
+    case OperationsActionsType.REMOVE_OPERATION:
+      return adapter.removeOne((<OperationsAction>action).payload, state);
 
-    case OperationActionsTypes.REMOVE_OPERATION:
-      return adapter.removeOne((<AircraftsActions>action).payload, state);
     // ! GET ALL AIRCRAFTS
     case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
       console.log('loading...');

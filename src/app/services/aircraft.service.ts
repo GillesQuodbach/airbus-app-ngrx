@@ -43,4 +43,11 @@ export class AircraftService {
       environment.host + `/aircrafts?prog_like=${value}`
     );
   }
+
+  public getOperations(): Observable<Aircraft[]> {
+    // let host =
+    //   Math.random() > 0.5 ? environment.host : environment.unreachableHost;
+    // return this.http.get<Aircraft[]>(host + '/aircrafts');
+    return this.http.get<Aircraft[]>(environment.host + '/entities');
+  }
 }

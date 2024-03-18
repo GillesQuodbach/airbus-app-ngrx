@@ -5,11 +5,5 @@
     { "id": 3, "prog": "A380", "design": false, "development": true },
     { "id": 4, "prog": "A400M", "design": false, "development": false },
     { "id": 5, "prog": "A330", "design": true, "development": true }
-  ],
-  "ids": [5, 3, 1],
-  "entities": [
-    { "id": 1, "name": "po" },
-    { "id": 3, "name": "jo" },
-    { "id": 5, "name": "mo" }
   ]
 }

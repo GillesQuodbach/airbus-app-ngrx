@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
-  AircraftsActionsTypes,
   GetAllAircraftsAction,
   GetDesignedAircraftsAction,
   GetDevelopmentAircraftsAction,
@@ -9,7 +8,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
 import { Store } from '@ngrx/store';
-import { GetAllEntitiesAction } from 'src/app/ngrx/aircrafts.operations';
+
 @Component({
   selector: 'app-aircrafts-navbar',
   templateUrl: './aircrafts-navbar.component.html',
@@ -28,7 +27,6 @@ export class AircraftsNavbarComponent implements OnInit {
   // lorsque l'utilisateur clic sur le bouton l'action corespondante est PUBLIEE
   getAllAircrafts() {
     this.store.dispatch(new GetAllAircraftsAction({}));
-    this.store.dispatch(new GetAllEntitiesAction({}));
   }
 
   getSearchedAircrafts(value: any) {

@@ -7,7 +7,7 @@ import {
 import { AircraftsActions, AircraftsActionsTypes } from './aircrafts.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Operation } from '../model/operation.model';
-import { OperationsAction, OperationsActionsType } from './operation.actions';
+import { OperationsActionsType } from './operation.actions';
 
 // adaptateur pour utiliser les méthodes de Entities
 export const adapter: EntityAdapter<Operation> = createEntityAdapter<Operation>(
@@ -29,9 +29,9 @@ export function AircraftsReducer(
 ): AircraftsState {
   switch (action.type) {
     case OperationsActionsType.ADD_OPERATION:
-      return adapter.addOne((<OperationsAction>action).payload, state);
+      return adapter.addOne((<AircraftsActions>action).payload, state);
     case OperationsActionsType.REMOVE_OPERATION:
-      return adapter.removeOne((<OperationsAction>action).payload, state);
+      return adapter.removeOne((<AircraftsActions>action).payload, state);
 
     // ! GET ALL AIRCRAFTS
     case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:

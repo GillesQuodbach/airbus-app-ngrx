@@ -1,4 +1,4 @@
 export interface Operation {
-  id: string;
+  id: number;
   name: string;
 }

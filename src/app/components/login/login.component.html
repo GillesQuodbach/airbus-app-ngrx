@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header">Login</div>
         <div class="card-body">
-          <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+          <form [formGroup]="loginForm" (ngSubmit)="loginUser(); getAllUsers()">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input

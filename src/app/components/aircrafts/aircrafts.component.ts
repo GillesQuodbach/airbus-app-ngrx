@@ -29,12 +29,7 @@ export class AircraftsComponent implements OnInit {
   readonly aircraftsStateEnum = AircraftsStateEnum;
   readonly dataStateEnum = DataStateEnum;
 
-  constructor(
-    private aircraftService: AircraftService,
-    private labo: Laboratory,
-    private eventService: EventService,
-    private store: Store<any>
-  ) {
+  constructor(private store: Store<any>) {
     this.counterAlertAircrafts$ = store.select(selectCountAlertAircrafts);
   }
 

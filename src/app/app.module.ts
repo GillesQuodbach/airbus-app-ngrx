@@ -13,9 +13,16 @@ import { AircraftsEffects } from './ngrx/aircrafts.effect';
 import { AircraftsReducer } from './ngrx/aircrafts.reducer';
 import { AlertComponent } from './components/aircrafts/alert/alert.component';
 import { LoginComponent } from './components/login/login.component';
+import { UsersEffects } from './ngrx/login/login.effect';
 
 @NgModule({
-  declarations: [AppComponent, AircraftsComponent, AircraftsNavbarComponent, AlertComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    AircraftsComponent,
+    AircraftsNavbarComponent,
+    AlertComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,7 +30,7 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ airbusState: AircraftsReducer }), // spécifie le reducer
-    EffectsModule.forRoot([AircraftsEffects]), // ! spécifie les effects => LoginEffects <= a remettre
+    EffectsModule.forRoot([AircraftsEffects, UsersEffects]), // ! spécifie les effects => LoginEffects <= a remettre
     StoreDevtoolsModule.instrument(), // envoi les infos à chaque action au devtools
   ],
   providers: [],

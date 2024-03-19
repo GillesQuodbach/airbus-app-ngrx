@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AircraftsState } from 'src/app/ngrx/aircrafts.state';
+
+import { GetUserAction } from 'src/app/ngrx/login/login.actions';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +12,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {}
 
@@ -21,6 +26,11 @@ export class LoginComponent implements OnInit {
     ],
     password: ['', [Validators.required]],
   });
+
+  getAllUsers() {
+    console.log('hello from get all users');
+    this.store.dispatch(new GetUserAction({}));
+  }
 
   loginUser() {
     const { email, password } = this.loginForm.value;

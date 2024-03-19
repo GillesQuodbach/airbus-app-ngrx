@@ -8,6 +8,7 @@ import { AircraftsActions, AircraftsActionsTypes } from './aircrafts.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Operation } from '../model/operation.model';
 import { OperationsActionsType } from './operation.actions';
+import { UserActions, UsersActionsTypes } from './login/login.actions';
 
 // adaptateur pour utiliser les méthodes de Entities
 export const adapter: EntityAdapter<Operation> = createEntityAdapter<Operation>(
@@ -21,6 +22,7 @@ export const initialState: AircraftsState = adapter.getInitialState({
   dataState: AircraftsStateEnum.INITIAL,
   ids: [],
   entities: {},
+  users: [],
 });
 
 export function AircraftsReducer(
@@ -33,6 +35,30 @@ export function AircraftsReducer(
     case OperationsActionsType.REMOVE_OPERATION:
       return adapter.removeOne((<AircraftsActions>action).payload, state);
 
+    // ! GET ALL USERS
+    case UsersActionsTypes.GET_USERS:
+      console.log('loading...');
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
+    case UsersActionsTypes.GET_USERS_SUCCESS:
+      console.log('loaded...');
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADED,
+        aircrafts: (<AircraftsActions>action).payload,
+        users: (<UserActions>action).payload,
+      };
+
+    case UsersActionsTypes.GET_USERS_ERROR:
+      console.log('error');
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.ERROR,
+        aircrafts: (<AircraftsActions>action).payload,
+      };
     // ! GET ALL AIRCRAFTS
     case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
       console.log('loading...');

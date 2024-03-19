@@ -9,7 +9,6 @@ import {
   GetUserActionSuccess,
   UsersActionsTypes,
 } from './login.actions';
-import { AircraftsState } from '../aircrafts.state';
 
 @Injectable()
 export class UsersEffects {

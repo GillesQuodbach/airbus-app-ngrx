@@ -30,7 +30,7 @@ import { UsersEffects } from './ngrx/login/login.effect';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ airbusState: AircraftsReducer }), // spécifie le reducer
-    EffectsModule.forRoot([AircraftsEffects, UsersEffects]), // ! spécifie les effects => LoginEffects <= a remettre
+    EffectsModule.forRoot([AircraftsEffects, UsersEffects]),
     StoreDevtoolsModule.instrument(), // envoi les infos à chaque action au devtools
   ],
   providers: [],

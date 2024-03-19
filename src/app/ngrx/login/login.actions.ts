@@ -10,6 +10,10 @@ export enum UsersActionsTypes {
   GET_USERS = '[User] Get User',
   GET_USERS_SUCCESS = '[User] Get User Success',
   GET_USERS_ERROR = '[User] Get User Error',
+
+  GET_USERS_LOGGED = '[User] Get User Logged',
+  GET_USERS_LOGGED_SUCCESS = '[User] Get User Logged Success',
+  GET_USERS_LOGGED_ERROR = '[User] Get User Logged Error',
 }
 
 export class GetUserAction implements Action {
@@ -27,7 +31,25 @@ export class GetUserActionError implements Action {
   constructor(public payload: string) {}
 }
 
+export class GetUserLogged implements Action {
+  type: UsersActionsTypes = UsersActionsTypes.GET_USERS_LOGGED;
+  constructor(public payload: any) {}
+}
+
+export class GetUserLoggedSuccess implements Action {
+  type: UsersActionsTypes = UsersActionsTypes.GET_USERS_LOGGED_SUCCESS;
+  constructor(public payload: User[]) {}
+}
+
+export class GetUserLoggedError implements Action {
+  type: UsersActionsTypes = UsersActionsTypes.GET_USERS_LOGGED_ERROR;
+  constructor(public payload: User[]) {}
+}
+
 export type UserActions =
   | GetUserAction
   | GetUserActionSuccess
-  | GetUserActionError;
+  | GetUserActionError
+  | GetUserLogged
+  | GetUserLoggedSuccess
+  | GetUserLoggedError;

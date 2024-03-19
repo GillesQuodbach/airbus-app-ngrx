@@ -23,6 +23,7 @@ export const initialState: AircraftsState = adapter.getInitialState({
   ids: [],
   entities: {},
   users: [],
+  isUserLogged: false,
 });
 
 export function AircraftsReducer(
@@ -35,6 +36,36 @@ export function AircraftsReducer(
     case OperationsActionsType.REMOVE_OPERATION:
       return adapter.removeOne((<AircraftsActions>action).payload, state);
 
+    // ! User LOGGED
+    case UsersActionsTypes.GET_USERS_LOGGED:
+      console.log('loading...');
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+        aircrafts: (<AircraftsActions>action).payload,
+        users: (<UserActions>action).payload,
+        isUserLogged: (<UserActions>action).payload,
+      };
+
+    case UsersActionsTypes.GET_USERS_LOGGED_SUCCESS:
+      console.log('loaded...');
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+        aircrafts: (<AircraftsActions>action).payload,
+        users: (<UserActions>action).payload,
+        isUserLogged: (<UserActions>action).payload,
+      };
+
+    case UsersActionsTypes.GET_USERS_LOGGED_SUCCESS:
+      console.log('error');
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+        aircrafts: (<AircraftsActions>action).payload,
+        users: (<UserActions>action).payload,
+        isUserLogged: (<UserActions>action).payload,
+      };
     // ! GET ALL USERS
     case UsersActionsTypes.GET_USERS:
       console.log('loading...');
@@ -42,6 +73,7 @@ export function AircraftsReducer(
         ...state,
         dataState: AircraftsStateEnum.LOADING,
         aircrafts: (<AircraftsActions>action).payload,
+        users: (<UserActions>action).payload,
       };
     case UsersActionsTypes.GET_USERS_SUCCESS:
       console.log('loaded...');

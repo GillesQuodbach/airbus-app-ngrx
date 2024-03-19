@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 export class AuthenticateService {
   constructor(private http: HttpClient) {}
   public getUsers(): Observable<User[]> {
-    console.log('bonjour');
     return this.http.get<User[]>(environment.host + '/users');
   }
 }

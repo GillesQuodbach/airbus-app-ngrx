@@ -16,6 +16,7 @@ export interface AircraftsState extends EntityState<Operation> {
   errorMessage: string;
   dataState: AircraftsStateEnum;
   users: User[];
+  isUserLogged: boolean;
 }
 
 //état initial du state et valeurs par défaut
@@ -26,6 +27,7 @@ export const initState: AircraftsState = {
   ids: [],
   entities: {},
   users: [],
+  isUserLogged: false,
 };
 
 // {

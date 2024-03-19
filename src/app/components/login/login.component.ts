@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { createFeatureSelector, createSelector, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AircraftsState } from 'src/app/ngrx/aircrafts.state';
+import { User } from 'src/app/model/user.model';
+import {
+  AircraftsState,
+  AircraftsStateEnum,
+} from 'src/app/ngrx/aircrafts.state';
 
 import { GetUserAction } from 'src/app/ngrx/login/login.actions';
+import { DataStateEnum } from 'src/app/state/aircraft.state';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +17,15 @@ import { GetUserAction } from 'src/app/ngrx/login/login.actions';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  useLogged$: Observable<void> | undefined;
+  readonly aircraftsStateEnum = AircraftsStateEnum;
+  readonly dataStateEnum = DataStateEnum;
+  static loginForm: any;
   constructor(private fb: FormBuilder, private store: Store) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(new GetUserAction({}));
+  }
 
   loginForm = this.fb.group({
     email: [
@@ -26,11 +37,6 @@ export class LoginComponent implements OnInit {
     ],
     password: ['', [Validators.required]],
   });
-
-  getAllUsers() {
-    console.log('hello from get all users');
-    this.store.dispatch(new GetUserAction({}));
-  }
 
   loginUser() {
     const { email, password } = this.loginForm.value;

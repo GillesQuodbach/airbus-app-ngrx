@@ -4,35 +4,65 @@
       <div class="card">
         <div class="card-header">Login</div>
         <div class="card-body">
-          <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input
-                formControlName="email"
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="Enter email"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input
-                formControlName="password"
-                type="password"
-                class="form-control"
-                id="password"
-                placeholder="Password"
-              />
-            </div>
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="loginForm.invalid"
-            >
-              Login
-            </button>
-          </form>
+          <ng-container
+            *ngIf="!(userLogged$ | async) as isUserLoggedIn"
+            [ngSwitch]="aircraftsStateEnum.LOADED"
+          >
+            <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  formControlName="password"
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Password"
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="loginForm.invalid"
+              >
+                Login
+              </button>
+            </form>
+          </ng-container>
+          <ng-container
+            *ngIf="userLogged$ | async as isUserLoggedIn"
+            [ngSwitch]="aircraftsStateEnum.LOADED"
+          >
+            <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="loginForm.invalid"
+              >
+                Deconnexion
+              </button>
+            </form>
+          </ng-container>
         </div>
       </div>
     </div>

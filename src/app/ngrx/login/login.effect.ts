@@ -19,11 +19,21 @@ export class UsersEffects {
 
   getAllUsersEffect: Observable<Action> = createEffect(() =>
     this.effectActions.pipe(
-      ofType(UsersActionsTypes.GET_USERS),
-      mergeMap((action) => {
-        return this.authService.getUsers().pipe(
-          map((user) => new GetUserActionSuccess(user)),
-          catchError((err) => of(new GetUserActionError(err.message)))
+      ofType(UsersActionsTypes.GET_USER),
+      mergeMap((action: { type: string; payload: { email: string } }) => {
+        const { email } = action.payload;
+        console.log(email);
+        return this.authService.checkEmail(email).pipe(
+          mergeMap((emailExists) => {
+            if (emailExists) {
+              return this.authService.getUsers(email).pipe(
+                map((user) => new GetUserActionSuccess(user)),
+                catchError((err) => of(new GetUserActionError(err.message)))
+              );
+            } else {
+              return of(new GetUserActionError('Email does not exist'));
+            }
+          })
         );
       })
     )

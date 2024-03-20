@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { createFeatureSelector, createSelector, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user.model';
+import { isUserLoggedIn } from 'src/app/ngrx/aircrafts.selectors';
 import {
   AircraftsState,
   AircraftsStateEnum,
@@ -17,14 +18,15 @@ import { DataStateEnum } from 'src/app/state/aircraft.state';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  useLogged$: Observable<void> | undefined;
+  userLogged$: Observable<boolean> | undefined;
   readonly aircraftsStateEnum = AircraftsStateEnum;
   readonly dataStateEnum = DataStateEnum;
   static loginForm: any;
+
   constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new GetUserAction({}));
+    this.userLogged$ = this.store.select(isUserLoggedIn);
   }
 
   loginForm = this.fb.group({
@@ -42,5 +44,6 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
     console.log(email);
     console.log(password);
+    this.store.dispatch(new GetUserAction({ email }));
   }
 }

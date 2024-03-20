@@ -1,9 +1,5 @@
 import { Action } from '@ngrx/store';
-import {
-  AircraftsState,
-  AircraftsStateEnum,
-  initState,
-} from './aircrafts.state';
+import { AircraftsState, AircraftsStateEnum } from './aircrafts.state';
 import { AircraftsActions, AircraftsActionsTypes } from './aircrafts.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Operation } from '../model/operation.model';
@@ -35,39 +31,8 @@ export function AircraftsReducer(
       return adapter.addOne((<AircraftsActions>action).payload, state);
     case OperationsActionsType.REMOVE_OPERATION:
       return adapter.removeOne((<AircraftsActions>action).payload, state);
-
-    // ! User LOGGED
-    case UsersActionsTypes.GET_USERS_LOGGED:
-      console.log('loading...');
-      return {
-        ...state,
-        dataState: AircraftsStateEnum.LOADING,
-        aircrafts: (<AircraftsActions>action).payload,
-        users: (<UserActions>action).payload,
-        isUserLogged: (<UserActions>action).payload,
-      };
-
-    case UsersActionsTypes.GET_USERS_LOGGED_SUCCESS:
-      console.log('loaded...');
-      return {
-        ...state,
-        dataState: AircraftsStateEnum.LOADING,
-        aircrafts: (<AircraftsActions>action).payload,
-        users: (<UserActions>action).payload,
-        isUserLogged: (<UserActions>action).payload,
-      };
-
-    case UsersActionsTypes.GET_USERS_LOGGED_SUCCESS:
-      console.log('error');
-      return {
-        ...state,
-        dataState: AircraftsStateEnum.LOADING,
-        aircrafts: (<AircraftsActions>action).payload,
-        users: (<UserActions>action).payload,
-        isUserLogged: (<UserActions>action).payload,
-      };
     // ! GET ALL USERS
-    case UsersActionsTypes.GET_USERS:
+    case UsersActionsTypes.GET_USER:
       console.log('loading...');
       return {
         ...state,
@@ -75,16 +40,17 @@ export function AircraftsReducer(
         aircrafts: (<AircraftsActions>action).payload,
         users: (<UserActions>action).payload,
       };
-    case UsersActionsTypes.GET_USERS_SUCCESS:
+    case UsersActionsTypes.GET_USER_SUCCESS:
       console.log('loaded...');
       return {
         ...state,
         dataState: AircraftsStateEnum.LOADED,
         aircrafts: (<AircraftsActions>action).payload,
         users: (<UserActions>action).payload,
+        isUserLogged: true,
       };
 
-    case UsersActionsTypes.GET_USERS_ERROR:
+    case UsersActionsTypes.GET_USER_ERROR:
       console.log('error');
       return {
         ...state,

@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { User } from '../model/user.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { isUserLoggedIn } from '../ngrx/aircrafts.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticateService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
 
   public checkEmail(email: string): Observable<boolean> {
     return this.http
@@ -19,5 +20,10 @@ export class AuthenticateService {
 
   public getUsers(email: string): Observable<User[]> {
     return this.http.get<User[]>(environment.host + `/users?email=${email}`);
+  }
+
+  isUserLoggedIn$(): Observable<boolean> {
+    console.log(isUserLoggedIn);
+    return this.store.select(isUserLoggedIn);
   }
 }

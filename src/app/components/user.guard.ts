@@ -6,13 +6,17 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { AuthenticateService } from '../services/authenticate.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthenticateService
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -21,6 +25,17 @@ export class UserGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true;
+    return this.authService.isUserLoggedIn$().pipe(
+      map((isLoggedIn) => {
+        if (isLoggedIn) {
+          console.log('From guard USER CONNECTED');
+          return true;
+        } else {
+          this.router.navigateByUrl('/login');
+          console.log('From guard USER NOT CONNECTED');
+          return false;
+        }
+      })
+    );
   }
 }

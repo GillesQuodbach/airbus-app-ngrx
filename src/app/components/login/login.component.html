@@ -43,24 +43,9 @@
             [ngSwitch]="aircraftsStateEnum.LOADED"
           >
             <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  formControlName="email"
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="Enter email"
-                />
-              </div>
+              <div class="mb-3">Bienvenue</div>
 
-              <button
-                type="submit"
-                class="btn btn-primary"
-                [disabled]="loginForm.invalid"
-              >
-                Deconnexion
-              </button>
+              <button type="submit" class="btn btn-danger">Deconnexion</button>
             </form>
           </ng-container>
         </div>

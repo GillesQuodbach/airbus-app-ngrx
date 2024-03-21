@@ -6,8 +6,9 @@ import {
   GetSearchedAircraftsAction,
 } from 'src/app/ngrx/aircrafts.actions';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EventService } from 'src/app/services/event.service';
 import { Store } from '@ngrx/store';
+import { isUserLoggedIn } from 'src/app/ngrx/aircrafts.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-aircrafts-navbar',
@@ -24,18 +25,11 @@ export class AircraftsNavbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // lorsque l'utilisateur clic sur le bouton l'action corespondante est PUBLIEE
   getAllAircrafts() {
     this.store.dispatch(new GetAllAircraftsAction({}));
   }
 
   getSearchedAircrafts(value: any) {
-    // console.log(value.value.searchValue);
-    // this.eventEmitter.emit({
-    //   type: AircraftsActionsTypes.GET_SEARCH_AIRCRAFTS,
-    //   payload: value.value.searchValue,
-    // });
-    console.log(value.value.searchValue);
     this.store.dispatch(
       new GetSearchedAircraftsAction({ value: value.value.searchValue })
     );

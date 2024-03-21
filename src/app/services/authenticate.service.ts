@@ -23,7 +23,6 @@ export class AuthenticateService {
   }
 
   isUserLoggedIn$(): Observable<boolean> {
-    console.log(isUserLoggedIn);
     return this.store.select(isUserLoggedIn);
   }
 }

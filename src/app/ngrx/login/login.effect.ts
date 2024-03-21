@@ -22,7 +22,7 @@ export class UsersEffects {
       ofType(UsersActionsTypes.GET_USER),
       mergeMap((action: { type: string; payload: { email: string } }) => {
         const { email } = action.payload;
-        console.log(email);
+
         return this.authService.checkEmail(email).pipe(
           mergeMap((emailExists) => {
             if (emailExists) {

@@ -33,7 +33,6 @@ export function AircraftsReducer(
       return adapter.removeOne((<AircraftsActions>action).payload, state);
     // ! GET ALL USERS
     case UsersActionsTypes.GET_USER:
-      console.log('loading...');
       return {
         ...state,
         dataState: AircraftsStateEnum.LOADING,
@@ -41,7 +40,6 @@ export function AircraftsReducer(
         users: (<UserActions>action).payload,
       };
     case UsersActionsTypes.GET_USER_SUCCESS:
-      console.log('loaded...');
       return {
         ...state,
         dataState: AircraftsStateEnum.LOADED,
@@ -59,7 +57,6 @@ export function AircraftsReducer(
       };
     // ! GET ALL AIRCRAFTS
     case AircraftsActionsTypes.GET_ALL_AIRCRAFTS:
-      console.log('loading...');
       return {
         ...state,
         dataState: AircraftsStateEnum.LOADING,

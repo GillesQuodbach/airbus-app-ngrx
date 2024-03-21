@@ -28,7 +28,6 @@ export const selectDevAndDesignedAircrafts = createSelector(
         }
       });
     }
-    console.log('aircraftArray', aircraftArray);
     return aircraftArray;
   }
 );
@@ -37,15 +36,12 @@ export const isUserLoggedIn = createSelector(
   createFeatureSelector('airbusState'),
 
   (state: AircraftsState) => {
-    console.log('test');
     let isConnected;
     if (state.isUserLogged === true) {
-      console.log('USER CONNECTED');
       isConnected = true;
     } else {
       isConnected = false;
     }
-    console.log('hello from selector isUserLoggedIn', isConnected);
     return isConnected;
   }
 );

@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { createFeatureSelector, createSelector, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/model/user.model';
 import { isUserLoggedIn } from 'src/app/ngrx/aircrafts.selectors';
-import {
-  AircraftsState,
-  AircraftsStateEnum,
-} from 'src/app/ngrx/aircrafts.state';
-
+import { AircraftsStateEnum } from 'src/app/ngrx/aircrafts.state';
 import { GetUserAction } from 'src/app/ngrx/login/login.actions';
 import { DataStateEnum } from 'src/app/state/aircraft.state';
 
@@ -42,8 +37,6 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     const { email, password } = this.loginForm.value;
-    console.log(email);
-    console.log(password);
     this.store.dispatch(new GetUserAction({ email }));
   }
 }

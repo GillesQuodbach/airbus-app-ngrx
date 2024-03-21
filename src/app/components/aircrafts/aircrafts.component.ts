@@ -3,16 +3,9 @@ import {
   AircraftsStateEnum,
 } from './../../ngrx/aircrafts.state';
 import { Component, OnInit } from '@angular/core';
-import { AircraftService } from 'src/app/services/aircraft.service';
 import { Aircraft } from 'src/app/model/aircraft.model';
 import { Observable, startWith, map, catchError, of } from 'rxjs';
 import { AppDataState, DataStateEnum } from 'src/app/state/aircraft.state';
-import { Laboratory } from 'laboratory';
-import {
-  ActionEvent,
-  AircraftsActionsTypes,
-} from 'src/app/ngrx/aircrafts.actions';
-import { EventService } from 'src/app/services/event.service';
 import { Store } from '@ngrx/store';
 import { selectCountAlertAircrafts } from 'src/app/ngrx/aircrafts.selectors';
 

@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { AircraftService } from '../services/aircraft.service';
-import { Observable, catchError, map, mergeMap, of } from 'rxjs';
+import { EMPTY, Observable, catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   AircraftsActionsTypes,
@@ -14,12 +16,19 @@ import {
   GetSearchedAircraftsActionSuccess,
   GetSearchedAircraftsActionError,
 } from './aircrafts.actions';
+import {
+  GetUserLogoutAction,
+  GetUserLogoutActionSuccess,
+  UsersActionsTypes,
+} from './login/login.actions';
 
 @Injectable()
 export class AircraftsEffects {
   constructor(
     private aircraftService: AircraftService,
-    private effectActions: Actions
+    private effectActions: Actions,
+    private authService: AuthenticateService,
+    private router: Router
   ) {}
 
   getAllAircraftsEffect: Observable<Action> = createEffect(() =>

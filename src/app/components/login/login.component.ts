@@ -1,3 +1,4 @@
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -18,7 +19,11 @@ export class LoginComponent implements OnInit {
   readonly dataStateEnum = DataStateEnum;
   static loginForm: any;
 
-  constructor(private fb: FormBuilder, private store: Store) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private authService: AuthenticateService
+  ) {}
 
   ngOnInit(): void {
     this.userLogged$ = this.store.select(isUserLoggedIn);
@@ -38,5 +43,10 @@ export class LoginComponent implements OnInit {
   loginUser() {
     const { email, password } = this.loginForm.value;
     this.store.dispatch(new GetUserAction({ email }));
+  }
+
+  logoutUser() {
+    console.log('USER LOGOUT');
+    this.authService.logout();
   }
 }

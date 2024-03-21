@@ -4,7 +4,11 @@ import { AircraftsActions, AircraftsActionsTypes } from './aircrafts.actions';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Operation } from '../model/operation.model';
 import { OperationsActionsType } from './operation.actions';
-import { UserActions, UsersActionsTypes } from './login/login.actions';
+import {
+  LogoutActionsTypes,
+  UserActions,
+  UsersActionsTypes,
+} from './login/login.actions';
 
 // adaptateur pour utiliser les méthodes de Entities
 export const adapter: EntityAdapter<Operation> = createEntityAdapter<Operation>(
@@ -27,6 +31,26 @@ export function AircraftsReducer(
   action: Action
 ): AircraftsState {
   switch (action.type) {
+    // !LOGOUT USER
+    case LogoutActionsTypes.LOGOUT_USER:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADING,
+      };
+    case LogoutActionsTypes.LOGOUT_USER_SUCCESS:
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.LOADED,
+        isUserLogged: false,
+      };
+
+    case LogoutActionsTypes.LOGOUT_USER_ERROR:
+      console.log('error');
+      return {
+        ...state,
+        dataState: AircraftsStateEnum.ERROR,
+      };
+    // ! ADD / REMOVE OPERATION
     case OperationsActionsType.ADD_OPERATION:
       return adapter.addOne((<AircraftsActions>action).payload, state);
     case OperationsActionsType.REMOVE_OPERATION:

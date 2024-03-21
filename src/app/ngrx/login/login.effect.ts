@@ -1,20 +1,26 @@
 import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
-import { Observable, catchError, map, mergeMap, of } from 'rxjs';
+import { EMPTY, Observable, catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   GetUserAction,
   GetUserActionError,
   GetUserActionSuccess,
   UsersActionsTypes,
+  GetUserLogoutAction,
+  GetUserLogoutActionError,
+  GetUserLogoutActionSuccess,
+  LogoutActionsTypes,
 } from './login.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UsersEffects {
   constructor(
     private authService: AuthenticateService,
-    private effectActions: Actions
+    private effectActions: Actions,
+    private router: Router
   ) {}
 
   getAllUsersEffect: Observable<Action> = createEffect(() =>
@@ -38,4 +44,15 @@ export class UsersEffects {
       })
     )
   );
+  // GetUserLogout: Observable<Action> = createEffect(() =>
+  //   this.effectActions.pipe(
+  //     ofType(LogoutActionsTypes.LOGOUT_USER),
+  //     mergeMap(() => {
+  //       return this.authService.logout().pipe(
+  //         map(() => new GetUserLogoutActionSuccess()), // Action de succès si la déconnexion réussit
+  //         catchError((err) => of(new GetUserLogoutActionError(err.message))) // Action d'erreur en cas d'échec de la déconnexion
+  //       );
+  //     })
+  //   )
+  // );
 }

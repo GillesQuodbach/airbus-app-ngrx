@@ -42,7 +42,7 @@
             *ngIf="userLogged$ | async as isUserLoggedIn"
             [ngSwitch]="aircraftsStateEnum.LOADED"
           >
-            <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+            <form [formGroup]="loginForm" (ngSubmit)="logoutUser()">
               <div class="mb-3">Bienvenue</div>
 
               <button type="submit" class="btn btn-danger">Deconnexion</button>
